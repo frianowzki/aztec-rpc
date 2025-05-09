@@ -4,7 +4,19 @@
 
 ![52E793D1-8A86-4EC8-A883-E01088AA8C20_4_5005_c](https://github.com/user-attachments/assets/bcd43031-b014-4610-b3fd-5c9831576f62)
 #
-
+## - Stop & Remove Current Sequencer:
+```
+docker ps -a
+```
+```
+docker stop [aztec-container-id]
+```
+```
+rm -rf .aztec/alpha-testnet/data
+```
+```
+aztec-up alpha-testnet
+```
 ## - Installing Dependencies:
 ```
 apt -y update && apt -y upgrade
@@ -186,5 +198,8 @@ your_VPS_IP:3500
 docker ps -a
 ```
 ```
-docker logs -f <aztec-container-ID>
+docker logs -f [aztec-container-ID]
 ```
+#
+
+## Good luck guys!
