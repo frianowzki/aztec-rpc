@@ -98,6 +98,7 @@ ExecStart=/usr/bin/geth \
   --http.corsdomain "*" \
   --sepolia \
   --datadir /home/geth/geth \
+  --maxpeers=50 \
   --authrpc.jwtsecret /var/lib/secrets/jwt.hex
 
 [Install]
