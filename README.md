@@ -185,18 +185,10 @@ aztec start --node --archiver --sequencer \
 ```
 http://localhost:8545
 ```
-Or if you run it from different machine use:
-```
-your_VPS_IP:8545
-```
 #
 - Change `CONSENSUS_HOST_URL` with:
 ```
 http://localhost:4000
-```
-Or if you run it from different machine use:
-```
-your_VPS_IP:4000
 ```
 #
 - Enter and wait until it fully synced, you can check the logs using:
