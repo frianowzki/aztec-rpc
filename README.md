@@ -207,5 +207,15 @@ docker ps -a
 docker logs -f [aztec-container-ID]
 ```
 #
-
-## Good luck guys!
+## If You Want Stop & Remove:
+```
+systemctl stop geth.service
+systemctl disable geth.service
+rm /etc/systemd/system/geth.service
+```
+```
+systemctl stop beacon.service
+systemctl disable beacon.service
+rm /etc/systemd/system/beacon.service
+```
+## Good luck guys! 🤝🏼
