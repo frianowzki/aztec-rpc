@@ -92,7 +92,10 @@ User=geth
 WorkingDirectory=/home/geth
 ExecStart=/usr/bin/geth \
   --http \
+  --http.addr 0.0.0.0 \
+  --http.port 8545 \
   --http.api eth,net,engine,admin \
+  --http.corsdomain "*" \
   --sepolia \
   --datadir /home/geth/geth \
   --authrpc.jwtsecret /var/lib/secrets/jwt.hex
