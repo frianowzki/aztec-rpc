@@ -176,26 +176,27 @@ sudo journalctl -fu beacon
 #
 ### *wait until both of `geth` and `beacon` are fully synced (could take a few hours or even a day). 
 #
-## - Now go back to my previous guide [here](https://github.com/frianowzki/aztec-sequencer-node) and look at this part, we're gonna edit `RPC_URL` and `CONSENSUS_HOST_URL`:
+## - Now let's run Aztec Sequencer again:
 
 ```
-aztec start --node --archiver --sequencer \
-  --network alpha-testnet \
-  --l1-rpc-urls RPC_URL  \
-  --l1-consensus-host-urls CONSENSUS_HOST_URL \
-  --sequencer.validatorPrivateKey 0xPrivateKey \
-  --sequencer.coinbase 0xPublicAddress \
-  --p2p.p2pIp IP \
-  --p2p.maxTxPoolSize 1000000000 \
-  --port 8081
+git clone https://github.com/frianowzki/aztec-rpc.git
+```
+```
+cd aztec-rpc
+```
+```
+chmod +x ./aztec.sh
+```
+```
+./aztec.sh
 ```
 #
-- Change `RPC_URL` with:
+- Change `ETHEREUM_HOSTS` with:
 ```
 http://localhost:8545
 ```
 #
-- Change `CONSENSUS_HOST_URL` with:
+- Change `L1_CONSENSUS_HOST_URL` with:
 ```
 http://localhost:4000
 ```
