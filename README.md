@@ -97,6 +97,7 @@ ExecStart=/usr/bin/geth \
   --http.port 8545 \
   --http.api eth,net,engine,admin \
   --http.corsdomain "*" \
+  --http.vhosts="localhost,host.docker.internal" \
   --sepolia \
   --datadir /home/geth/geth \
   --maxpeers=50 \
