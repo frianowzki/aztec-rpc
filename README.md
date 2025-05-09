@@ -137,7 +137,7 @@ Restart=always
 RestartSec=5s
 User=beacon
 ExecStart=/home/beacon/bin/prysm.sh beacon-chain \
-  —sepolia \
+  —-sepolia \
   --datadir /home/beacon/beacon \
   --execution-endpoint=http://127.0.0.1:8551 \
   --jwt-secret=/var/lib/secrets/jwt.hex \
