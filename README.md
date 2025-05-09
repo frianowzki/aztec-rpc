@@ -144,6 +144,9 @@ RestartSec=5s
 User=beacon
 ExecStart=/home/beacon/bin/prysm.sh beacon-chain \
   —-sepolia \
+  --rpc-host=0.0.0.0 \
+  --rpc-port=4000 \
+  --http.vhosts="localhost,host.docker.internal" \
   --datadir /home/beacon/beacon \
   --execution-endpoint=http://127.0.0.1:8551 \
   --jwt-secret=/var/lib/secrets/jwt.hex \
