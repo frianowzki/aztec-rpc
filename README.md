@@ -167,7 +167,7 @@ sudo journalctl -fu beacon
 #
 ### *wait until both of `geth` and `beacon` are fully synced (could take a few hours or even a day). 
 #
-## - Now go back to my previous guide [here](https://github.com/frianowzki/aztec-sequencer-node) and look at this part:
+## - Now go back to my previous guide [here](https://github.com/frianowzki/aztec-sequencer-node) and look at this part, we're gonna edit `RPC_URL` and `CONSENSUS_HOST_URL`:
 
 ```
 aztec start --node --archiver --sequencer \
