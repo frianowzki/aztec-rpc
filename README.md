@@ -32,6 +32,7 @@ apt dist-upgrade && sudo apt autoremove
 ## - Activate Firewall & Open Port:
 ```
 sudo ufw allow 8545/tcp
+sudo ufw allow 4000/tcp
 sudo ufw allow 30303/tcp
 sudo ufw allow 30303/udp
 sudo ufw allow 12000/udp
