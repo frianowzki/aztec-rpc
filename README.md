@@ -183,11 +183,11 @@ aztec start --node --archiver --sequencer \
 #
 - Change `RPC_URL` with:
 ```
-http://localhost:8551
+http://localhost:8545
 ```
 Or
 ```
-your_VPS_IP:8551
+your_VPS_IP:8545
 ```
 #
 - Change `CONSENSUS_HOST_URL` with:
