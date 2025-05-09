@@ -4,6 +4,12 @@
 
 ![52E793D1-8A86-4EC8-A883-E01088AA8C20_4_5005_c](https://github.com/user-attachments/assets/bcd43031-b014-4610-b3fd-5c9831576f62)
 #
+## Hardware requirements to run Execution & Consensus Node:
+- CPU 4+ Cores
+- 16GB+ RAM
+- 2TB SSD/NVMe
+- Network: 25 Mbps up/down bandwidth
+#
 ## - Stop & Remove Current Sequencer:
 ```
 docker ps -a
