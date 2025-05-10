@@ -161,7 +161,7 @@ ExecStart=/home/beacon/bin/prysm.sh beacon-chain \
 [Install]
 WantedBy=multi-user.target
 ```
-### *change `YourWalletAddress` with your validator public key
+#
 ## - Start & Enable `beacon` Service:
 ```
 sudo systemctl daemon-reload
@@ -179,30 +179,48 @@ sudo journalctl -fu beacon
 #
 ### *wait until both of `geth` and `beacon` are fully synced (could take a few hours or even a day). 
 ## - You can check your sync by running this script:
+```
+nano sync.sh
+```
+```
+#!/bin/bash
 
+echo "=== GETH SYNC STATUS ==="
+curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' \
+     -H "Content-Type: application/json" http://localhost:8545 | jq
+
+echo ""
+echo "=== BEACON SYNC STATUS ==="
+curl -s http://localhost:3500/eth/v1/node/syncing | jq
+```
+```
+chmod +x sync.sh
+```
+```
+./sync.sh
+```
 
 #
 ## - Now let's run Aztec Sequencer again:
 
 ```
-git clone https://github.com/frianowzki/aztec-rpc.git
-```
-```
-cd aztec-rpc
-```
-```
-chmod +x ./aztec.sh
-```
-```
-./aztec.sh
+aztec start --node --archiver --sequencer \
+  --network alpha-testnet \
+  --l1-rpc-urls RPC_URL  \
+  --l1-consensus-host-urls CONSENSUS_HOST_URL \
+  --sequencer.validatorPrivateKey 0xPrivateKey \
+  --sequencer.coinbase 0xPublicAddress \
+  --p2p.p2pIp IP \
+  --port 8081 \
+  --p2p.maxTxPoolSize 1000000000
 ```
 #
-- Change `ETHEREUM_HOSTS` with:
+- Change `RPC_URL` with:
 ```
 Your_VPS_IP:8545
 ```
 #
-- Change `L1_CONSENSUS_HOST_URL` with:
+- Change `CONSENSUS_HOST_URL` with:
 ```
 Your_VPS_IP:3500
 ```
