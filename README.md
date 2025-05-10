@@ -241,10 +241,16 @@ systemctl disable geth.service
 rm /etc/systemd/system/geth.service
 ```
 ```
+rm -rf /home/geth/
+```
+```
 systemctl stop beacon.service
 systemctl disable beacon.service
 ```
 ```
 rm /etc/systemd/system/beacon.service
+```
+```
+rm -rf /home/beacon/
 ```
 ## Good luck guys! 🤝🏼
