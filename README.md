@@ -15,7 +15,7 @@
 docker ps -a
 ```
 ```
-docker stop [aztec-container-id]
+docker stop [aztec-container-id] && docker rm [aztec-container-id]
 ```
 ```
 rm -rf .aztec/alpha-testnet/data
