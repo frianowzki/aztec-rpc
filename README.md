@@ -224,12 +224,12 @@ aztec start --node --archiver --sequencer \
 #
 - Change `RPC_URL` with:
 ```
-Your_VPS_IP:8545
+http://Your_VPS_IP:8545
 ```
 #
 - Change `CONSENSUS_HOST_URL` with:
 ```
-Your_VPS_IP:3500
+http://Your_VPS_IP:3500
 ```
 #
 - Enter and wait until it fully synced, you can check the logs using:
