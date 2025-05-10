@@ -2,7 +2,8 @@
 
 ![aztec-logo](https://github.com/user-attachments/assets/e2e679eb-86d3-4704-8395-aa91bea90c42)
 
-![52E793D1-8A86-4EC8-A883-E01088AA8C20_4_5005_c](https://github.com/user-attachments/assets/bcd43031-b014-4610-b3fd-5c9831576f62)
+![8980F4C8-4ED7-43DE-B928-C8D99AB2EC4D_1_201_a](https://github.com/user-attachments/assets/e174c074-4a4a-44c0-8f68-65995fbf84b9)
+
 #
 ## Hardware requirements to run Execution & Consensus Node:
 - CPU 4+ Cores
