@@ -32,12 +32,14 @@ apt dist-upgrade && sudo apt autoremove
 ## - Activate Firewall & Open Port:
 ```
 sudo ufw allow 8545/tcp
+sudo ufw allow 3500/tcp
 sudo ufw allow 4000/tcp
 sudo ufw allow 30303/tcp
 sudo ufw allow 30303/udp
 sudo ufw allow 12000/udp
 sudo ufw allow 13000/tcp
 sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
 sudo ufw enable
 ```
 ```
@@ -145,8 +147,9 @@ RestartSec=5s
 User=beacon
 ExecStart=/home/beacon/bin/prysm.sh beacon-chain \
   —-sepolia \
-  --rpc-host=0.0.0.0 \
-  --rpc-port=4000 \
+  --http-modules=beacon,config,node,validator
+  --rpc-host=0.0.0.0 --rpc-port=4000 \
+  --grpc-gateway-host=0.0.0.0 --grpc-gateway-port=3500 \
   --datadir /home/beacon/beacon \
   --execution-endpoint=http://127.0.0.1:8551 \
   --jwt-secret=/var/lib/secrets/jwt.hex \
@@ -193,12 +196,12 @@ chmod +x ./aztec.sh
 #
 - Change `ETHEREUM_HOSTS` with:
 ```
-http://localhost:8545
+Your_VPS_IP:8545
 ```
 #
 - Change `L1_CONSENSUS_HOST_URL` with:
 ```
-http://localhost:4000
+Your_VPS_IP:3500
 ```
 #
 - Enter and wait until it fully synced, you can check the logs using:
