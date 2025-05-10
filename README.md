@@ -70,11 +70,20 @@ sudo chmod 640 /var/lib/secrets/jwt.hex
 sudo -u geth mkdir /home/geth/geth
 sudo -u beacon mkdir /home/beacon/beacon
 ```
-## - Install Ethereum:
+## - Install Ethereum & geth:
 ```
 sudo add-apt-repository -y ppa:ethereum/ethereum
 sudo apt-get update
 sudo apt-get install ethereum
+```
+```
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.15.11-36b2371c.tar.gz
+```
+```
+tar -xvf geth-linux-amd64-1.15.11-36b2371c.tar.gz
+```
+```
+sudo mv geth-linux-amd64-1.15.11-36b2371c/geth /usr/bin/geth
 ```
 ## - Create `geth` Service:
 ```
