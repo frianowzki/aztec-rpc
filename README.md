@@ -95,13 +95,14 @@ RestartSec=5s
 User=geth
 WorkingDirectory=/home/geth
 ExecStart=/usr/bin/geth \
+  --sepolia \
   --http \
   --http.addr 0.0.0.0 \
   --http.port 8545 \
   --http.api eth,net,engine,admin \
+  --authrpc.addr "127.0.0.1" --authrpc.port 8551 \
   --http.corsdomain "*" \
   --http.vhosts="localhost,host.docker.internal" \
-  --sepolia \
   --datadir /home/geth/geth \
   --maxpeers=50 \
   --authrpc.jwtsecret /var/lib/secrets/jwt.hex
