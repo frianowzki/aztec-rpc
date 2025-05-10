@@ -219,8 +219,7 @@ aztec start --node --archiver --sequencer \
   --sequencer.validatorPrivateKey 0xPrivateKey \
   --sequencer.coinbase 0xPublicAddress \
   --p2p.p2pIp IP \
-  --port 8081 \
-  --p2p.maxTxPoolSize 1000000000
+  --port 8081 
 ```
 #
 - Change `RPC_URL` with:
