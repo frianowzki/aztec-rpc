@@ -147,14 +147,13 @@ Restart=always
 RestartSec=5s
 User=beacon
 ExecStart=/home/beacon/bin/prysm.sh beacon-chain \
-  —-sepolia \
-  --http-modules=beacon,config,node,validator
+  --sepolia \
+  --http-modules=beacon,config,node,validator \
   --rpc-host=0.0.0.0 --rpc-port=4000 \
   --grpc-gateway-host=0.0.0.0 --grpc-gateway-port=3500 \
   --datadir /home/beacon/beacon \
   --execution-endpoint=http://127.0.0.1:8551 \
   --jwt-secret=/var/lib/secrets/jwt.hex \
-  --suggested-fee-recipient=YourWalletAddress \
   --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io/ \
   --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io/ \
   --accept-terms-of-use
@@ -179,6 +178,9 @@ sudo journalctl -fu beacon
 ```
 #
 ### *wait until both of `geth` and `beacon` are fully synced (could take a few hours or even a day). 
+## - You can check your sync by running this script:
+
+
 #
 ## - Now let's run Aztec Sequencer again:
 
