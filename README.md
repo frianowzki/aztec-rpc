@@ -186,7 +186,8 @@ sudo systemctl status beacon
 sudo journalctl -fu beacon
 ```
 #
-### *wait until both of `geth` and `beacon` are fully synced (could take a few hours or even a day). 
+#### *wait until both of `geth` and `beacon` are fully synced (could take a few hours or even a day). 
+#
 ## - You can check your sync by running this script:
 ```
 nano sync.sh
