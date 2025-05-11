@@ -58,8 +58,14 @@ sudo usermod -a -G eth beacon
 ## - Generate JWT Secret:
 ```
 sudo mkdir -p /var/lib/secrets
+```
+```
 sudo chgrp -R eth /var/lib/ /var/lib/secrets
+```
+```
 sudo chmod 750 /var/lib/ /var/lib/secrets
+```
+```
 sudo openssl rand -hex 32 | tr -d '\n' | sudo tee /var/lib/secrets/jwt.hex > /dev/null
 ```
 ```
