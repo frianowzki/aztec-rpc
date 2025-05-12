@@ -27,6 +27,7 @@ aztec-up alpha-testnet
 ## - Installing Dependencies:
 ```
 apt -y update && apt -y upgrade
+apt-get install coreutils curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev -y
 apt dist-upgrade && sudo apt autoremove
 ```
 
