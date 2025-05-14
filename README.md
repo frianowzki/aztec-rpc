@@ -11,7 +11,33 @@
 - 2TB SSD/NVMe
 - Network: 25 Mbps up/down bandwidth
 #
-## - Stop & Remove Current Sequencer:
+## 1. Follow This Step If It's Your First Time Running Aztec Sequencer (Otherwise Just Next To Step 2):
+```
+sudo apt-get update && sudo apt-get upgrade -y
+```
+```
+sudo apt install curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev screen  -y
+```
+```
+source <(wget -O - https://raw.githubusercontent.com/frianowzki/installer/main/docker.sh)
+```
+```
+sudo groupadd docker && sudo usermod -aG docker $(whoami) && newgrp docker
+```
+```
+bash -i <(curl -s https://install.aztec.network)
+```
+```
+echo 'export PATH=$PATH:/root/.aztec/bin' >> ~/.bashrc
+```
+```
+source ~/.bashrc
+```
+```
+aztec-up alpha-testnet
+```
+#
+## 2. Stop & Remove Current Sequencer:
 ```
 docker ps -a
 ```
@@ -24,14 +50,14 @@ rm -rf .aztec/alpha-testnet/data
 ```
 aztec-up alpha-testnet
 ```
-## - Installing Dependencies:
+## 3. Installing Dependencies:
 ```
 apt -y update && apt -y upgrade
 apt-get install coreutils curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev -y
 apt dist-upgrade && sudo apt autoremove
 ```
 
-## - Activate Firewall & Open Port:
+## 4. Activate Firewall & Open Port:
 ```
 sudo ufw allow 8545/tcp
 sudo ufw allow 3500/tcp
@@ -48,7 +74,7 @@ sudo ufw enable
 sudo ufw status
 ```
 
-## - Add New Users & Group:
+## 5. Add New Users & Group:
 ```
 sudo adduser --home /home/geth --disabled-password --gecos 'Geth Client' geth
 sudo adduser --home /home/beacon --disabled-password --gecos 'Prysm Beacon Client' beacon
@@ -56,7 +82,7 @@ sudo groupadd eth
 sudo usermod -a -G eth geth
 sudo usermod -a -G eth beacon
 ```
-## - Generate JWT Secret:
+## 6. Generate JWT Secret:
 ```
 sudo mkdir -p /var/lib/secrets
 ```
@@ -73,12 +99,12 @@ sudo openssl rand -hex 32 | tr -d '\n' | sudo tee /var/lib/secrets/jwt.hex > /de
 sudo chown root:eth /var/lib/secrets/jwt.hex
 sudo chmod 640 /var/lib/secrets/jwt.hex
 ```
-## - Create Directory for `geth` and `beacon`:
+## 7. Create Directory for `geth` and `beacon`:
 ```
 sudo -u geth mkdir /home/geth/geth
 sudo -u beacon mkdir /home/beacon/beacon
 ```
-## - Install Ethereum & geth:
+## 8. Install Ethereum & geth:
 ```
 sudo add-apt-repository -y ppa:ethereum/ethereum
 sudo apt-get update
@@ -93,7 +119,7 @@ tar -xvf geth-linux-amd64-1.15.11-36b2371c.tar.gz
 ```
 sudo mv geth-linux-amd64-1.15.11-36b2371c/geth /usr/bin/geth
 ```
-## - Create `geth` Service:
+## 9. Create `geth` Service:
 ```
 sudo nano /etc/systemd/system/geth.service
 ```
@@ -140,7 +166,7 @@ sudo systemctl status geth
 ```
 sudo journalctl -fu geth
 ```
-## - Create `beacon` Directory & Configure `prysm`:
+## 10. Create `beacon` Directory & Configure `prysm`:
 ```
 sudo -u beacon mkdir /home/beacon/bin
 sudo -u beacon curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output /home/beacon/bin/prysm.sh
@@ -195,7 +221,7 @@ sudo journalctl -fu beacon
 #
 #### *wait until both of `geth` and `beacon` are fully synced (could take a few hours or even a day). 
 #
-## - You can check your sync by running this script:
+## 11. You can check your sync by running this script:
 ```
 nano sync.sh
 ```
@@ -218,7 +244,7 @@ chmod +x sync.sh
 ```
 
 #
-## - Now let's run Aztec Sequencer again:
+## 12. Now let's run Aztec Sequencer again:
 
 ```
 aztec start --node --archiver --sequencer \
