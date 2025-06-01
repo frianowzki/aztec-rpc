@@ -332,6 +332,7 @@ services:
       --node \
       --archiver \
       --sequencer \
+      --port 8081 \
       --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
     ports:
       - 40400:40400/tcp
