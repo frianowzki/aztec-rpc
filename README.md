@@ -48,9 +48,9 @@ docker stop [aztec-container-id] && docker rm [aztec-container-id]
 rm -rf .aztec/alpha-testnet/data
 ```
 ```
-aztec-up alpha-testnet
+aztec-up -v 0.87.7
 ```
-### * Latest Aztec image is 0.87.2
+### * Latest Aztec image is 0.87.7
 ## 3. Installing Dependencies:
 ```
 apt -y update && apt -y upgrade
