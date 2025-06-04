@@ -356,7 +356,7 @@ docker stop [aztec-container-id] && docker rm [aztec-container-id]
 rm -rf .aztec/alpha-testnet/data
 ```
 ```
-aztec-up alpha-testnet
+aztec-up latest
 ```
 If you are using CLI you can just add this line
 ```
@@ -384,7 +384,7 @@ nano docker-compose.yml
 ```
 services:
   aztec-node:
-    container_name: aztec-sequencer
+    container_name: aztec
     image: aztecprotocol/aztec:alpha-testnet
     restart: unless-stopped
     environment:
