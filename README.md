@@ -50,6 +50,22 @@ rm -rf .aztec/alpha-testnet/data
 ```
 aztec-up -v 0.87.7
 ```
+If You Are Using Docker Compose:
+```
+cd .aztec/alpha-testnet
+```
+```
+docker-compose down -v
+```
+```
+rm -rf ~/.aztec/alpha-testnet/data/
+```
+```
+aztec-up -v 0.87.7
+```
+```
+docker-compose up -d
+```
 ### * Latest Aztec image is 0.87.7
 ## 3. Installing Dependencies:
 ```
@@ -275,7 +291,61 @@ docker ps -a
 ```
 docker logs -f [aztec-container-ID]
 ```
-## 13. Update Aztec Governance (Only for Validators):
+#
+## 13. Run Sequencer Using Docker Compose:
+```
+cd .aztec/alpha-testnet
+```
+```
+nano .env
+```
+```
+ETHEREUM_RPC_URL=http://your_IP:8545
+CONSENSUS_BEACON_URL=http://your_IP:3500
+VALIDATOR_PRIVATE_KEY=0xPrivateKey
+COINBASE=0xPublicAddress
+P2P_IP=your_IP
+```
+```
+nano docker-compose.yml
+```
+```
+services:
+  aztec-node:
+    container_name: aztec
+    image: aztecprotocol/aztec:alpha-testnet
+    restart: unless-stopped
+    environment:
+      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
+      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
+      DATA_DIRECTORY: /data
+      VALIDATOR_PRIVATE_KEY: ${VALIDATOR_PRIVATE_KEY}
+      COINBASE: ${COINBASE}
+      P2P_IP: ${P2P_IP}
+      LOG_LEVEL: debug
+    entrypoint: >
+      sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
+      --network alpha-testnet \
+      --node \
+      --archiver \
+      --sequencer \
+      --port 8081
+    ports:
+      - 40400:40400/tcp
+      - 40400:40400/udp
+      - 8081:8081
+    volumes:
+      - /root/.aztec/alpha-testnet/data/:/data
+```
+```
+docker-compose up -d
+```
+Check the Logs with
+```
+docker logs -f aztec
+```
+#
+## 14. Update Aztec Governance (Only for Validators):
 ```
 docker ps -a
 ```
@@ -367,4 +437,11 @@ rm /etc/systemd/system/beacon.service
 ```
 rm -rf /home/beacon
 ```
+```
+docker stop aztec && docker rm aztec
+```
+```
+rm -rf .aztec
+```
+
 ## Good luck guys! 🤝🏼
