@@ -48,7 +48,7 @@ docker stop [aztec-container-id] && docker rm [aztec-container-id]
 rm -rf .aztec/alpha-testnet/data
 ```
 ```
-aztec-up -v 0.87.7
+aztec-up latest
 ```
 If You Are Using Docker Compose:
 ```
@@ -61,7 +61,7 @@ docker-compose down -v
 rm -rf ~/.aztec/alpha-testnet/data/
 ```
 ```
-aztec-up -v 0.87.7
+aztec-up latest
 ```
 ```
 docker-compose up -d
@@ -313,7 +313,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:alpha-testnet
+    image: aztecprotocol/aztec:latest
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -329,6 +329,7 @@ services:
       --node \
       --archiver \
       --sequencer \
+      --auto-update config \
       --port 8081
     ports:
       - 40400:40400/tcp
@@ -385,7 +386,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:alpha-testnet
+    image: aztecprotocol/aztec:latest
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -402,6 +403,7 @@ services:
       --node \
       --archiver \
       --sequencer \
+      --auto-update config \
       --port 8081 \
       --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
     ports:
