@@ -66,7 +66,7 @@ aztec-up latest
 ```
 docker-compose up -d
 ```
-### * Latest Aztec image is 0.87.7
+### * Latest Aztec image is 0.87.8
 ## 3. Installing Dependencies:
 ```
 apt -y update && apt -y upgrade
@@ -292,7 +292,7 @@ docker ps -a
 docker logs -f [aztec-container-ID]
 ```
 #
-## 13. Run Sequencer Using Docker Compose:
+## 13. Run Sequencer Using Docker Compose + Installing Auto Updater:
 ```
 cd .aztec/alpha-testnet
 ```
@@ -305,6 +305,7 @@ CONSENSUS_BEACON_URL=http://your_IP:3500
 VALIDATOR_PRIVATE_KEY=0xPrivateKey
 COINBASE=0xPublicAddress
 P2P_IP=your_IP
+AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
 ```
 ```
 nano docker-compose.yml
@@ -323,20 +324,29 @@ services:
       COINBASE: ${COINBASE}
       P2P_IP: ${P2P_IP}
       LOG_LEVEL: debug
+      AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}
     entrypoint: >
       sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
       --network alpha-testnet \
       --node \
       --archiver \
       --sequencer \
-      --auto-update config \
-      --port 8081
+      --port 8081 \
+      --auto-update-url ${AUTO_UPDATE_URL} \
+      --auto-update config-and-version 
     ports:
       - 40400:40400/tcp
       - 40400:40400/udp
       - 8081:8081
     volumes:
       - /root/.aztec/alpha-testnet/data/:/data
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --interval 300
 ```
 ```
 docker-compose up -d
@@ -377,6 +387,7 @@ VALIDATOR_PRIVATE_KEY=0xPrivateKey
 COINBASE=0xPublicAddress
 P2P_IP=your_IP
 GOVERNANCE_PAYLOAD=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
+AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
 ```
 Save it and set Docker Compose:
 ```
@@ -412,6 +423,13 @@ services:
       - 8081:8081
     volumes:
       - /root/.aztec/alpha-testnet/data/:/data
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --interval 300
 ```
 Run it by use this command:
 ```
