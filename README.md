@@ -388,6 +388,8 @@ COINBASE=0xPublicAddress
 P2P_IP=your_IP
 GOVERNANCE_PAYLOAD=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
 AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
+OTEL_RESOURCE_ATTRIBUTES="aztec.node_role=sequencer,aztec.registry_address=0x4d2cc1d5fb6be65240e0bfc8154243e69c0fb19e"
+OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="https://telemetry.alpha-testnet.aztec.network/v1/metrics"
 ```
 Save it and set Docker Compose:
 ```
