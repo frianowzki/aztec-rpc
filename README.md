@@ -353,6 +353,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --cleanup --interval 300
 ```
+Add this below `AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}` if you want to share your metrics:
+```
+      OTEL_RESOURCE_ATTRIBUTES: ${OTEL_RESOURCE_ATTRIBUTES}
+      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT}
+```
 ```
 docker-compose up -d
 ```
@@ -441,11 +446,20 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --cleanup --interval 300
 ```
+Add this below `AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}` if you want to share your metrics:
+```
+      OTEL_RESOURCE_ATTRIBUTES: ${OTEL_RESOURCE_ATTRIBUTES}
+      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT}
+```
 Run it by use this command:
 ```
 docker compose up -d
 ```
 #
+Check if you are sharing your metrics: 
+```
+docker exec -it aztec env | grep OTEL_
+```
 ## If You Want Stop & Remove:
 ```
 systemctl stop geth.service
