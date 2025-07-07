@@ -423,6 +423,7 @@ services:
       P2P_IP: ${P2P_IP}
       LOG_LEVEL: debug
       GOVERNANCE_PAYLOAD: ${GOVERNANCE_PAYLOAD}
+      AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}
     entrypoint: >
       sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
       --network alpha-testnet \
