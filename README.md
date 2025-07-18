@@ -66,7 +66,7 @@ aztec-up latest
 ```
 docker-compose up -d
 ```
-### * Latest Aztec image is 0.87.8
+### * Latest Aztec image is 0.87.9
 ## 3. Installing Dependencies:
 ```
 apt -y update && apt -y upgrade
