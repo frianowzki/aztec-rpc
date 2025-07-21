@@ -58,6 +58,7 @@ docker-compose down -v
 ```
 aztec-up 1.1.2
 ```
+* Need to edit docker-compose.yml to and change the image to ``1.1.2``
 ```
 docker-compose up -d
 ```
@@ -457,15 +458,84 @@ Check if you are sharing your metrics:
 docker exec -it aztec env | grep OTEL_
 ```
 #
-If you using auto-updater and suddenly auto updated to ``v1.1.0`` which made an error like ``“cannot propose block 1 since committee does not exist on L1 “`` you can run this:
+## 15. [Update] if you are a validator and running the latest version ``1.1.2`` you can add more than 1 validator (10 validators max). You can add this to your command:
+- For CLI Users:
 ```
-aztec-up 0.87.9 && sed -i 's/latest/0.87.9/' "$HOME/.aztec/bin/.aztec-run" && aztec -V
+--sequencer.validatorPrivateKeys 0xprivatekey1,0xprivatekey2,etc \
+```
+(Optional) If you are running more than 1 validator and want to use 1 validator address as a default funding transactions address for all of those addresses, add this:
+```
+--sequencer.publisherPrivateKey 0xPublisherPrivateKey \
+```
+Replace ``0xprivatekey1,0xprivatekey2,etc`` with your new generated private keys and separate it with comma ``,`` (10 MAX)
+
+Change ``0xPublisherPrivateKey`` with your default/primary private key which has ETH Sepolia balance for funding the transactions
+#
+- For Docker-Compose Users:
+```
+cd .aztec/alpha-testnet
 ```
 ```
-rm -rf /tmp/aztec-world-state-*
+nano .env
 ```
 ```
-rm -rf ~/.aztec/alpha-testnet/data
+ETHEREUM_RPC_URL=http:/your_IP:8545
+CONSENSUS_BEACON_URL=http:/your_IP:3500
+VALIDATOR_PRIVATE_KEYS=0xPrivateKey1,0xprivatekey2,0xprivatekey3,etc
+COINBASE=0xPublicAddress
+P2P_IP=your_IP
+GOVERNANCE_PAYLOAD=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
+AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
+```
+(Optional) if you run more than one validator, add this below the ``VALIDATOR_PRIVATE_KEYS=0xprivatekey1,0xprivatekey2,0xprivatekey3,etc``:
+```
+SEQ_PUBLISHER_PRIVATE_KEY=0xprivatekey
+```
+```
+nano docker-compose.yml
+```
+```
+services:
+  aztec-node:
+    container_name: aztec
+    image: aztecprotocol/aztec:1.1.2
+    restart: unless-stopped
+    environment:
+      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
+      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
+      DATA_DIRECTORY: /data
+      VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+      COINBASE: ${COINBASE}
+      P2P_IP: ${P2P_IP}
+      LOG_LEVEL: debug
+      GOVERNANCE_PAYLOAD: ${GOVERNANCE_PAYLOAD}
+      AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}
+    entrypoint: >
+      sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
+      --network alpha-testnet \
+      --node \
+      --archiver \
+      --sequencer \
+      --auto-update config \
+      --port 8081 \
+      --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
+    ports:
+      - 40400:40400/tcp
+      - 40400:40400/udp
+      - 8081:8081
+    volumes:
+      - /root/.aztec/alpha-testnet/data/:/data
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --interval 300
+```
+(Optional) if you run more than one validator, add this below the ``VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}``:
+```
+SEQ_PUBLISHER_PRIVATE_KEY: ${SEQ_PUBLISHER_PRIVATE_KEY}
 ```
 #
 ## If You Want Stop & Remove:
