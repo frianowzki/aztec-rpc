@@ -38,7 +38,7 @@ aztec-up alpha-testnet
 ```
 #
 ## 2. Stop, Remove & Update Current Sequencer:
-###  * Latest Aztec image is ``1.1.0``
+###  * Latest Aztec image is ``1.1.2``
 ```
 docker ps -a
 ```
@@ -46,10 +46,7 @@ docker ps -a
 docker stop [aztec-container-id] && docker rm [aztec-container-id]
 ```
 ```
-rm -rf .aztec/alpha-testnet/data
-```
-```
-aztec-up 1.1.0
+aztec-up 1.1.2
 ```
 If You Are Using Docker Compose:
 ```
@@ -59,10 +56,9 @@ cd .aztec/alpha-testnet
 docker-compose down -v
 ```
 ```
-rm -rf ~/.aztec/alpha-testnet/data/
 ```
 ```
-aztec-up 1.1.0
+aztec-up 1.1.2
 ```
 ```
 docker-compose up -d
@@ -320,7 +316,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.1.0
+    image: aztecprotocol/aztec:1.1.2
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -413,7 +409,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.1.0
+    image: aztecprotocol/aztec:1.1.2
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
