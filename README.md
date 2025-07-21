@@ -12,6 +12,7 @@
 - Network: 25 Mbps up/down bandwidth
 #
 ## 1. Follow This Step If It's Your First Time Running Aztec Sequencer (Otherwise Just Next To Step 2):
+###  * Latest Aztec image is ``1.1.0``
 ```
 sudo apt-get update && sudo apt-get upgrade -y
 ```
@@ -48,7 +49,7 @@ docker stop [aztec-container-id] && docker rm [aztec-container-id]
 rm -rf .aztec/alpha-testnet/data
 ```
 ```
-aztec-up latest
+aztec-up 1.1.0
 ```
 If You Are Using Docker Compose:
 ```
@@ -61,12 +62,12 @@ docker-compose down -v
 rm -rf ~/.aztec/alpha-testnet/data/
 ```
 ```
-aztec-up latest
+aztec-up 1.1.0
 ```
 ```
 docker-compose up -d
 ```
-### * Latest Aztec image is 0.87.9
+###
 ## 3. Installing Dependencies:
 ```
 apt -y update && apt -y upgrade
@@ -319,7 +320,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:latest
+    image: aztecprotocol/aztec:1.1.0
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -412,7 +413,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:latest
+    image: aztecprotocol/aztec:1.1.0
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
