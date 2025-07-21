@@ -461,6 +461,18 @@ Check if you are sharing your metrics:
 ```
 docker exec -it aztec env | grep OTEL_
 ```
+#
+If you using auto-updater and suddenly auto updated to ``v1.1.0`` which made an error like ``“cannot propose block 1 since committee does not exist on L1 “`` you can run this:
+```
+aztec-up 0.87.9 && sed -i 's/latest/0.87.9/' "$HOME/.aztec/bin/.aztec-run" && aztec -V
+```
+```
+rm -rf /tmp/aztec-world-state-*
+```
+```
+rm -rf ~/.aztec/alpha-testnet/data
+```
+#
 ## If You Want Stop & Remove:
 ```
 systemctl stop geth.service
