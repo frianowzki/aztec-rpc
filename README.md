@@ -12,7 +12,6 @@
 - Network: 25 Mbps up/down bandwidth
 #
 ## 1. Follow This Step If It's Your First Time Running Aztec Sequencer (Otherwise Just Next To Step 2):
-###  * Latest Aztec image is ``1.1.0``
 ```
 sudo apt-get update && sudo apt-get upgrade -y
 ```
@@ -39,6 +38,7 @@ aztec-up alpha-testnet
 ```
 #
 ## 2. Stop, Remove & Update Current Sequencer:
+###  * Latest Aztec image is ``1.1.0``
 ```
 docker ps -a
 ```
