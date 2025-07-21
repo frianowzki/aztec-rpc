@@ -56,8 +56,6 @@ cd .aztec/alpha-testnet
 docker-compose down -v
 ```
 ```
-```
-```
 aztec-up 1.1.2
 ```
 ```
