@@ -39,6 +39,7 @@ aztec-up alpha-testnet
 #
 ## 2. Stop, Remove & Update Current Sequencer:
 ###  * Latest Aztec image is ``1.1.3``
+- If you are using CLI:
 ```
 docker ps -a
 ```
@@ -48,7 +49,7 @@ docker stop [aztec-container-id] && docker rm [aztec-container-id]
 ```
 aztec-up 1.1.3
 ```
-If You Are Using Docker Compose:
+- If You Are Using Docker Compose:
 ```
 cd .aztec/alpha-testnet
 ```
