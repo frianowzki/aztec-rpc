@@ -37,7 +37,7 @@ source ~/.bashrc
 aztec-up alpha-testnet
 ```
 #
-## 2. Stop, Remove & Update Current Sequencer:
+## 2. Update Sequencer:
 ###  * Latest Aztec image is ``1.1.3``
 - If you are using CLI:
 ```
