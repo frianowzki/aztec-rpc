@@ -314,7 +314,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.1.2
+    image: aztecprotocol/aztec:1.1.3
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -407,7 +407,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.1.2
+    image: aztecprotocol/aztec:1.1.3
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -457,7 +457,7 @@ Check if you are sharing your metrics:
 docker exec -it aztec env | grep OTEL_
 ```
 #
-## 15. [Update] if you are a validator and running the latest version ``1.1.2`` you can add more than 1 validator (10 validators max). You can add this to your command:
+## 15. [Update] if you are a validator and running the latest version ``1.1.3`` you can add more than 1 validator (10 validators max). You can add this to your command:
 - For CLI Users:
 ```
 --sequencer.validatorPrivateKeys 0xprivatekey1,0xprivatekey2,etc \
@@ -497,7 +497,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.1.2
+    image: aztecprotocol/aztec:1.1.3
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
