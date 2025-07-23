@@ -38,7 +38,7 @@ aztec-up alpha-testnet
 ```
 #
 ## 2. Stop, Remove & Update Current Sequencer:
-###  * Latest Aztec image is ``1.1.2``
+###  * Latest Aztec image is ``1.1.3``
 ```
 docker ps -a
 ```
@@ -46,21 +46,20 @@ docker ps -a
 docker stop [aztec-container-id] && docker rm [aztec-container-id]
 ```
 ```
-aztec-up 1.1.2
+aztec-up 1.1.3
 ```
 If You Are Using Docker Compose:
 ```
 cd .aztec/alpha-testnet
 ```
 ```
-docker-compose down -v
+aztec-up 1.1.3
 ```
 ```
-aztec-up 1.1.2
+sed -i 's|image: aztecprotocol/aztec:.*|image: aztecprotocol/aztec:1.1.3|' docker-compose.yml
 ```
-* Need to edit docker-compose.yml to and change the image to ``1.1.2``
 ```
-docker-compose up -d
+docker-compose down -v && docker-compose up -d 
 ```
 ###
 ## 3. Installing Dependencies:
