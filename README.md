@@ -264,7 +264,7 @@ aztec start --node --archiver --sequencer \
   --network alpha-testnet \
   --l1-rpc-urls RPC_URL  \
   --l1-consensus-host-urls CONSENSUS_HOST_URL \
-  --sequencer.validatorPrivateKey 0xPrivateKey \
+  --sequencer.validatorPrivateKeys 0xPrivateKey \
   --sequencer.coinbase 0xPublicAddress \
   --p2p.p2pIp IP \
   --port 8081 
@@ -324,7 +324,7 @@ services:
       VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
       COINBASE: ${COINBASE}
       P2P_IP: ${P2P_IP}
-      LOG_LEVEL: debug
+      LOG_LEVEL: info
       AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}
     entrypoint: >
       sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
@@ -417,7 +417,7 @@ services:
       VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
       COINBASE: ${COINBASE}
       P2P_IP: ${P2P_IP}
-      LOG_LEVEL: debug
+      LOG_LEVEL: info
       GOVERNANCE_PAYLOAD: ${GOVERNANCE_PAYLOAD}
       AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}
     entrypoint: >
@@ -507,7 +507,7 @@ services:
       VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
       COINBASE: ${COINBASE}
       P2P_IP: ${P2P_IP}
-      LOG_LEVEL: debug
+      LOG_LEVEL: info
       GOVERNANCE_PAYLOAD: ${GOVERNANCE_PAYLOAD}
       AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}
     entrypoint: >
