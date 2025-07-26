@@ -47,6 +47,10 @@ docker ps -a
 docker stop [aztec-container-id] && docker rm [aztec-container-id]
 ```
 ```
+rm -rf /tmp/aztec-world-state-*
+rm -rf ~/.aztec/alpha-testnet/data
+```
+```
 aztec-up 1.1.3
 ```
 - If You Are Using Docker Compose:
@@ -55,6 +59,10 @@ cd .aztec/alpha-testnet
 ```
 ```
 aztec-up 1.1.3
+```
+```
+rm -rf /tmp/aztec-world-state-*
+rm -rf ~/.aztec/alpha-testnet/data
 ```
 ```
 sed -i 's|image: aztecprotocol/aztec:.*|image: aztecprotocol/aztec:1.1.3|' docker-compose.yml
