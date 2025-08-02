@@ -38,7 +38,7 @@ aztec-up alpha-testnet
 ```
 #
 ## 2. Update Sequencer:
-###  * Latest Aztec image is ``1.2.0``
+###  * Latest Aztec image is ``1.2.1``
 - If you are using CLI:
 ```
 docker ps -a
@@ -51,21 +51,21 @@ rm -rf /tmp/aztec-world-state-*
 rm -rf ~/.aztec/alpha-testnet/data
 ```
 ```
-aztec-up 1.2.0
+aztec-up 1.2.1
 ```
 - If You Are Using Docker Compose:
 ```
 cd .aztec/alpha-testnet
 ```
 ```
-aztec-up 1.2.0
+aztec-up 1.2.1
 ```
 ```
 rm -rf /tmp/aztec-world-state-*
 rm -rf ~/.aztec/alpha-testnet/data
 ```
 ```
-sed -i 's|image: aztecprotocol/aztec:.*|image: aztecprotocol/aztec:1.2.0|' docker-compose.yml
+sed -i 's|image: aztecprotocol/aztec:.*|image: aztecprotocol/aztec:1.2.1|' docker-compose.yml
 ```
 ```
 docker-compose down -v && docker-compose up -d 
