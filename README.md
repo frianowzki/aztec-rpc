@@ -310,6 +310,7 @@ CONSENSUS_BEACON_URL=http://your_IP:3500
 VALIDATOR_PRIVATE_KEYS=0xPrivateKey
 COINBASE=0xPublicAddress
 P2P_IP=your_IP
+SYNC_SNAPSHOTS_URL: https://files5.blacknodes.net/Aztec
 AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
 ```
 Add this below `AUTO_UPDATE_URL` to share your node metrics (optional):
@@ -342,7 +343,7 @@ services:
       --archiver \
       --sequencer \
       --port 8081 \
-      --node.snapshotsUrl https://files5.blacknodes.net/Aztec \
+      --node.snapshotsUrl ${SYNC_SNAPSHOTS_URL} \
       --auto-update-url ${AUTO_UPDATE_URL} \
       --auto-update config-and-version 
     ports:
@@ -402,6 +403,7 @@ CONSENSUS_BEACON_URL=http:/your_IP:3500
 VALIDATOR_PRIVATE_KEYS=0xPrivateKey
 COINBASE=0xPublicAddress
 P2P_IP=your_IP
+SYNC_SNAPSHOTS_URL: https://files5.blacknodes.net/Aztec
 GOVERNANCE_PAYLOAD=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
 AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
 ```
@@ -438,7 +440,7 @@ services:
       --sequencer \
       --auto-update config \
       --port 8081 \
-      --node.snapshotsUrl https://files5.blacknodes.net/Aztec \
+      --node.snapshotsUrl ${SYNC_SNAPSHOTS_URL} \
       --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
     ports:
       - 40400:40400/tcp
@@ -495,6 +497,7 @@ CONSENSUS_BEACON_URL=http:/your_IP:3500
 VALIDATOR_PRIVATE_KEYS=0xPrivateKey1,0xprivatekey2,0xprivatekey3,etc
 COINBASE=0xPublicAddress
 P2P_IP=your_IP
+SYNC_SNAPSHOTS_URL: https://files5.blacknodes.net/Aztec
 GOVERNANCE_PAYLOAD=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
 AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
 ```
@@ -528,7 +531,7 @@ services:
       --archiver \
       --sequencer \
       --auto-update config \
-      --node.snapshotsUrl https://files5.blacknodes.net/Aztec \
+      --node.snapshotsUrl ${SYNC_SNAPSHOTS_URL} \
       --port 8081 \
       --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
     ports:
