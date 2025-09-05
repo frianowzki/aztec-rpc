@@ -275,6 +275,7 @@ aztec start --node --archiver --sequencer \
   --sequencer.validatorPrivateKeys 0xPrivateKey \
   --sequencer.coinbase 0xPublicAddress \
   --p2p.p2pIp IP \
+  --node.snapshotsUrl https://files5.blacknodes.net/Aztec \
   --port 8081 
 ```
 #
@@ -341,6 +342,7 @@ services:
       --archiver \
       --sequencer \
       --port 8081 \
+      --node.snapshotsUrl https://files5.blacknodes.net/Aztec \
       --auto-update-url ${AUTO_UPDATE_URL} \
       --auto-update config-and-version 
     ports:
@@ -436,6 +438,7 @@ services:
       --sequencer \
       --auto-update config \
       --port 8081 \
+      --node.snapshotsUrl https://files5.blacknodes.net/Aztec \
       --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
     ports:
       - 40400:40400/tcp
@@ -525,6 +528,7 @@ services:
       --archiver \
       --sequencer \
       --auto-update config \
+      --node.snapshotsUrl https://files5.blacknodes.net/Aztec \
       --port 8081 \
       --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
     ports:
