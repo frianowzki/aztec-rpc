@@ -325,7 +325,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.1.3
+    image: aztecprotocol/aztec:1.2.1
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -420,7 +420,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.1.3
+    image: aztecprotocol/aztec:1.2.1
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -512,7 +512,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.1.3
+    image: aztecprotocol/aztec:1.2.1
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
