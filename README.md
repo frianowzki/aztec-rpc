@@ -564,12 +564,6 @@ rm -rf $HOME/.aztec/alpha-testnet/data
 mkdir -p $HOME/.aztec/testnet
 ```
 ```
-wget https://files5.blacknodes.net/aztec/aztec-alpha-testnet.tar.lz4 -O $HOME/aztec-alpha-testnet.tar.lz4
-```
-```
-lz4 -d $HOME/aztec-alpha-testnet.tar.lz4 | tar x -C $HOME/.aztec/testnet
-```
-```
 cd .aztec/testnet
 ```
 ```
