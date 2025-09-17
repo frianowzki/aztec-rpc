@@ -552,6 +552,106 @@ services:
 ```
 SEQ_PUBLISHER_PRIVATE_KEY: ${SEQ_PUBLISHER_PRIVATE_KEY}
 ```
+## 16. Migration from ``alpha-testnet`` to ``testnet``
+#
+```
+docker stop aztec && docker rm aztec
+```
+```
+rm -rf $HOME/.aztec/alpha-testnet/data
+```
+```
+mkdir -p $HOME/.aztec/testnet
+```
+```
+wget https://files5.blacknodes.net/aztec/aztec-alpha-testnet.tar.lz4 -O $HOME/aztec-alpha-testnet.tar.lz4
+```
+```
+lz4 -d $HOME/aztec-alpha-testnet.tar.lz4 | tar x -C $HOME/.aztec/testnet
+```
+```
+cd .aztec/testnet
+```
+```
+aztec-up 2.0.2
+```
+### - If you are using CLI: 
+```
+NODE_OPTIONS="--max-old-space-size=32768" aztec start --node --archiver --sequencer \
+  --network testnet \
+  --l1-rpc-urls RPC_URL  \
+  --l1-consensus-host-urls BEACON_URL \
+  --sequencer.validatorPrivateKeys 0xPK1,0xPK2,etc \
+  --sequencer.publisherPrivateKey 0xYourPrivateKey \
+  --sequencer.coinbase 0xYourAddress \
+  --p2p.p2pIp Your_IP \
+  --node.snapshotsUrl https://files5.blacknodes.net/Aztec
+```
+#
+### - If you are using Docker Compose: 
+```
+cd .aztec/testnet
+```
+```
+nano .env
+```
+```
+ETHEREUM_RPC_URL=RPC_IP:8545
+CONSENSUS_BEACON_URL=RPC_IP:3500
+VALIDATOR_PRIVATE_KEYS=0xPK1,0xPK2,etc
+SEQ_PUBLISHER_PRIVATE_KEY=0xYourPrivateKey
+COINBASE=0xYourAddress
+P2P_IP=Your_IP
+GOVERNANCE_PAYLOAD=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
+SYNC_SNAPSHOTS_URL=https://files5.blacknodes.net/Aztec
+```
+### Ctrl + X + Y > Enter
+```
+nano docker-compose.yml
+```
+```
+services:
+  aztec-node:
+    container_name: aztec
+    image: aztecprotocol/aztec:2.0.2
+    restart: unless-stopped
+    environment:
+      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
+      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
+      DATA_DIRECTORY: /data
+      VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+      SEQ_PUBLISHER_PRIVATE_KEY: ${SEQ_PUBLISHER_PRIVATE_KEY}
+      COINBASE: ${COINBASE}
+      SYNC_SNAPSHOTS_URL: ${SYNC_SNAPSHOTS_URL}
+      P2P_IP: ${P2P_IP}
+      LOG_LEVEL: info
+      GOVERNANCE_PAYLOAD: ${GOVERNANCE_PAYLOAD}
+      OTEL_RESOURCE_ATTRIBUTES: ${OTEL_RESOURCE_ATTRIBUTES}
+      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT}
+    entrypoint: >
+      sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
+      --network testnet \
+      --node \
+      --archiver \
+      --sequencer \
+      --port 8081 \
+      --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
+    ports:
+      - 40400:40400/tcp
+      - 40400:40400/udp
+      - 8081:8081
+    volumes:
+      - /root/.aztec/testnet/data/:/data
+```
+### Ctrl + X + Y > Enter
+```
+docker-compose down -v && docker-compose up -d 
+```
+### Check Logs:
+```
+docker logs -f aztec 
+```
+## *Note: If you see this error ``WARN: sequencer Cannot propose block 1 at next L2 slot 385 since the committee does not exist on L1`` Just ignore it, all good. 
 #
 ## If You Want Stop & Remove:
 ```
