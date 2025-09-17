@@ -578,8 +578,7 @@ NODE_OPTIONS="--max-old-space-size=32768" aztec start --node --archiver --sequen
   --sequencer.validatorPrivateKeys 0xPK1,0xPK2,etc \
   --sequencer.publisherPrivateKey 0xYourPrivateKey \
   --sequencer.coinbase 0xYourAddress \
-  --p2p.p2pIp Your_IP \
-  --node.snapshotsUrl https://files5.blacknodes.net/Aztec
+  --p2p.p2pIp Your_IP
 ```
 #
 ### - If you are using Docker Compose: 
@@ -597,7 +596,6 @@ SEQ_PUBLISHER_PRIVATE_KEY=0xYourPrivateKey
 COINBASE=0xYourAddress
 P2P_IP=Your_IP
 GOVERNANCE_PAYLOAD=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
-SYNC_SNAPSHOTS_URL=https://files5.blacknodes.net/Aztec
 ```
 ### Ctrl + X + Y > Enter
 ```
@@ -616,7 +614,6 @@ services:
       VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
       SEQ_PUBLISHER_PRIVATE_KEY: ${SEQ_PUBLISHER_PRIVATE_KEY}
       COINBASE: ${COINBASE}
-      SYNC_SNAPSHOTS_URL: ${SYNC_SNAPSHOTS_URL}
       P2P_IP: ${P2P_IP}
       LOG_LEVEL: info
       GOVERNANCE_PAYLOAD: ${GOVERNANCE_PAYLOAD}
