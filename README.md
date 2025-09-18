@@ -558,6 +558,9 @@ SEQ_PUBLISHER_PRIVATE_KEY: ${SEQ_PUBLISHER_PRIVATE_KEY}
 docker stop aztec && docker rm aztec
 ```
 ```
+rm -rf /tmp/aztec-world-state-*
+```
+```
 rm -rf $HOME/.aztec/alpha-testnet/data
 ```
 ```
