@@ -615,21 +615,12 @@ services:
       L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
       DATA_DIRECTORY: /data
       VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
-      PUBLISHER_PRIVATE_KEY: ${PUBLISHER_PRIVATE_KEY}
+      SEQ_PUBLISHER_PRIVATE_KEY: ${PUBLISHER_PRIVATE_KEY}
       COINBASE: ${COINBASE}
       P2P_IP: ${P2P_IP}
       LOG_LEVEL: info
-      GOVERNANCE_PAYLOAD: ${GOVERNANCE_PAYLOAD}
-      OTEL_RESOURCE_ATTRIBUTES: ${OTEL_RESOURCE_ATTRIBUTES}
-      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT}
     entrypoint: >
-      sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
-      --network testnet \
-      --node \
-      --archiver \
-      --sequencer \
-      --port 8081 \
-      --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
+      sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start --network testnet --node --archiver --sequencer'
     ports:
       - 40400:40400/tcp
       - 40400:40400/udp
