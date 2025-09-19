@@ -570,7 +570,7 @@ mkdir -p $HOME/.aztec/testnet
 cd .aztec/testnet
 ```
 ```
-aztec-up 2.0.2
+aztec-up 2.0.2 && sed -i 's/latest/2.0.2/' "$HOME/.aztec/bin/.aztec-run" && aztec -V
 ```
 ### - If you are using CLI: 
 ```
