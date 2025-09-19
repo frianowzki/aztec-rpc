@@ -574,7 +574,7 @@ aztec-up 2.0.2
 ```
 ### - If you are using CLI: 
 ```
-NODE_OPTIONS="--max-old-space-size=32768" aztec start --node --archiver --sequencer \
+aztec start --node --archiver --sequencer \
   --network testnet \
   --l1-rpc-urls RPC_URL  \
   --l1-consensus-host-urls BEACON_URL \
