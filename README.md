@@ -1,8 +1,9 @@
 # Run Execution & Consensus Node for Aztec Network (Locally)
 
-![aztec-logo](https://github.com/user-attachments/assets/e2e679eb-86d3-4704-8395-aa91bea90c42)
+<img width="731" height="249" alt="Screenshot_2025-09-11_180859-removebg-preview" src="https://github.com/user-attachments/assets/0eda5e4e-1446-42e1-888e-cc911d0b3539" />
 
-![8980F4C8-4ED7-43DE-B928-C8D99AB2EC4D_1_201_a](https://github.com/user-attachments/assets/e174c074-4a4a-44c0-8f68-65995fbf84b9)
+
+<img width="1536" height="1024" alt="Art 1" src="https://github.com/user-attachments/assets/1661b282-b149-4255-9952-3a7d6b2361a8" />
 
 #
 ## Hardware requirements to run Execution & Consensus Node:
