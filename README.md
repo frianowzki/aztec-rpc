@@ -38,7 +38,7 @@ aztec-up alpha-testnet
 ```
 #
 ## 2. Update Sequencer:
-###  * Latest Aztec image is ``1.2.1``
+###  * Latest Aztec image is ``2.0.3``
 - If you are using CLI:
 ```
 docker ps -a
@@ -51,21 +51,21 @@ rm -rf /tmp/aztec-world-state-*
 rm -rf ~/.aztec/alpha-testnet/data
 ```
 ```
-aztec-up 1.2.1
+aztec-up 2.0.3
 ```
 - If You Are Using Docker Compose:
 ```
 cd .aztec/alpha-testnet
 ```
 ```
-aztec-up 1.2.1
+aztec-up 2.0.3
 ```
 ```
 rm -rf /tmp/aztec-world-state-*
 rm -rf ~/.aztec/alpha-testnet/data
 ```
 ```
-sed -i 's|image: aztecprotocol/aztec:.*|image: aztecprotocol/aztec:1.2.1|' docker-compose.yml
+sed -i 's|image: aztecprotocol/aztec:.*|image: aztecprotocol/aztec:2.0.3|' docker-compose.yml
 ```
 ```
 docker-compose down -v && docker-compose up -d 
@@ -269,13 +269,12 @@ chmod +x sync.sh
 
 ```
 aztec start --node --archiver --sequencer \
-  --network alpha-testnet \
+  --network testnet \
   --l1-rpc-urls RPC_URL  \
   --l1-consensus-host-urls CONSENSUS_HOST_URL \
   --sequencer.validatorPrivateKeys 0xPrivateKey \
   --sequencer.coinbase 0xPublicAddress \
   --p2p.p2pIp IP \
-  --node.snapshotsUrl https://files5.blacknodes.net/Aztec \
   --port 8081 
 ```
 #
@@ -310,13 +309,6 @@ CONSENSUS_BEACON_URL=http://your_IP:3500
 VALIDATOR_PRIVATE_KEYS=0xPrivateKey
 COINBASE=0xPublicAddress
 P2P_IP=your_IP
-SYNC_SNAPSHOTS_URL: https://files5.blacknodes.net/Aztec
-AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
-```
-Add this below `AUTO_UPDATE_URL` to share your node metrics (optional):
-```
-OTEL_RESOURCE_ATTRIBUTES="aztec.node_role=sequencer,aztec.registry_address=0x4d2cc1d5fb6be65240e0bfc8154243e69c0fb19e"
-OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="https://telemetry.alpha-testnet.aztec.network/v1/metrics"
 ```
 ```
 nano docker-compose.yml
@@ -325,7 +317,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.2.1
+    image: aztecprotocol/aztec:2.0.3
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -335,35 +327,19 @@ services:
       COINBASE: ${COINBASE}
       P2P_IP: ${P2P_IP}
       LOG_LEVEL: info
-      AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}
     entrypoint: >
       sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
-      --network alpha-testnet \
+      --network testnet \
       --node \
       --archiver \
       --sequencer \
-      --port 8081 \
-      --node.snapshotsUrl ${SYNC_SNAPSHOTS_URL} \
-      --auto-update-url ${AUTO_UPDATE_URL} \
-      --auto-update config-and-version 
+      --port 8081
     ports:
       - 40400:40400/tcp
       - 40400:40400/udp
       - 8081:8081
     volumes:
-      - /root/.aztec/alpha-testnet/data/:/data
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --cleanup --interval 300
-```
-Add this below `AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}` if you want to share your metrics:
-```
-      OTEL_RESOURCE_ATTRIBUTES: ${OTEL_RESOURCE_ATTRIBUTES}
-      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT}
+      - /root/.aztec/testnet/data/:/data
 ```
 ```
 docker-compose up -d
@@ -384,11 +360,7 @@ docker stop [aztec-container-id] && docker rm [aztec-container-id]
 rm -rf .aztec/alpha-testnet/data
 ```
 ```
-aztec-up latest
-```
-If you are using CLI you can just add this line
-```
---sequencer.governanceProposerPayload 0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
+aztec-up 2.0.3
 ```
 Or if you use Docker Compose you can use this on your .env 
 ```
@@ -403,14 +375,6 @@ CONSENSUS_BEACON_URL=http:/your_IP:3500
 VALIDATOR_PRIVATE_KEYS=0xPrivateKey
 COINBASE=0xPublicAddress
 P2P_IP=your_IP
-SYNC_SNAPSHOTS_URL: https://files5.blacknodes.net/Aztec
-GOVERNANCE_PAYLOAD=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
-AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
-```
-Add this below `AUTO_UPDATE_URL` to share your node metrics (optional):
-```
-OTEL_RESOURCE_ATTRIBUTES="aztec.node_role=sequencer,aztec.registry_address=0x4d2cc1d5fb6be65240e0bfc8154243e69c0fb19e"
-OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="https://telemetry.alpha-testnet.aztec.network/v1/metrics"
 ```
 Save it and set Docker Compose:
 ```
@@ -420,7 +384,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.2.1
+    image: aztecprotocol/aztec:2.0.3
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -430,48 +394,26 @@ services:
       COINBASE: ${COINBASE}
       P2P_IP: ${P2P_IP}
       LOG_LEVEL: info
-      GOVERNANCE_PAYLOAD: ${GOVERNANCE_PAYLOAD}
-      AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}
     entrypoint: >
       sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
-      --network alpha-testnet \
+      --network testnet \
       --node \
       --archiver \
       --sequencer \
-      --auto-update config \
-      --port 8081 \
-      --node.snapshotsUrl ${SYNC_SNAPSHOTS_URL} \
-      --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
+      --port 8081
     ports:
       - 40400:40400/tcp
       - 40400:40400/udp
       - 8081:8081
     volumes:
-      - /root/.aztec/alpha-testnet/data/:/data
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --cleanup --interval 300
-```
-Add this below `AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}` if you want to share your metrics:
-```
-      OTEL_RESOURCE_ATTRIBUTES: ${OTEL_RESOURCE_ATTRIBUTES}
-      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT}
+      - /root/.aztec/testnet/data/:/data
 ```
 Run it by use this command:
 ```
 docker compose up -d
 ```
 #
-Check if you are sharing your metrics: 
-```
-docker exec -it aztec env | grep OTEL_
-```
-#
-## 15. [Update] if you are a validator and running the latest version ``1.1.3`` you can add more than 1 validator (10 validators max). You can add this to your command:
+## 15. [Update] if you are a validator and running the latest version ``2.0.3`` you can add more than 1 validator (10 validators max). You can add this to your command:
 - For CLI Users:
 ```
 --sequencer.validatorPrivateKeys 0xprivatekey1,0xprivatekey2,etc \
@@ -497,13 +439,10 @@ CONSENSUS_BEACON_URL=http:/your_IP:3500
 VALIDATOR_PRIVATE_KEYS=0xPrivateKey1,0xprivatekey2,0xprivatekey3,etc
 COINBASE=0xPublicAddress
 P2P_IP=your_IP
-SYNC_SNAPSHOTS_URL: https://files5.blacknodes.net/Aztec
-GOVERNANCE_PAYLOAD=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
-AUTO_UPDATE_URL=https://storage.googleapis.com/aztec-testnet/auto-update/alpha-testnet.json
 ```
 (Optional) if you run more than one validator, add this below the ``VALIDATOR_PRIVATE_KEYS=0xprivatekey1,0xprivatekey2,0xprivatekey3,etc``:
 ```
-SEQ_PUBLISHER_PRIVATE_KEY=0xprivatekey
+PUBLISHER_PRIVATE_KEY=0xprivatekey
 ```
 ```
 nano docker-compose.yml
@@ -512,7 +451,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:1.2.1
+    image: aztecprotocol/aztec:2.0.3
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -522,35 +461,23 @@ services:
       COINBASE: ${COINBASE}
       P2P_IP: ${P2P_IP}
       LOG_LEVEL: info
-      GOVERNANCE_PAYLOAD: ${GOVERNANCE_PAYLOAD}
-      AUTO_UPDATE_URL: ${AUTO_UPDATE_URL}
     entrypoint: >
       sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start \
-      --network alpha-testnet \
+      --network testnet \
       --node \
       --archiver \
       --sequencer \
-      --auto-update config \
-      --node.snapshotsUrl ${SYNC_SNAPSHOTS_URL} \
-      --port 8081 \
-      --sequencer.governanceProposerPayload ${GOVERNANCE_PAYLOAD}"
+      --port 8081
     ports:
       - 40400:40400/tcp
       - 40400:40400/udp
       - 8081:8081
     volumes:
-      - /root/.aztec/alpha-testnet/data/:/data
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --cleanup --interval 300
+      - /root/.aztec/testnet/data/:/data
 ```
 (Optional) if you run more than one validator, add this below the ``VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}``:
 ```
-SEQ_PUBLISHER_PRIVATE_KEY: ${SEQ_PUBLISHER_PRIVATE_KEY}
+SEQ_PUBLISHER_PRIVATE_KEY: ${PUBLISHER_PRIVATE_KEY}
 ```
 ## 16. Migration from ``alpha-testnet`` to ``testnet``
 #
@@ -570,7 +497,7 @@ mkdir -p $HOME/.aztec/testnet
 cd .aztec/testnet
 ```
 ```
-aztec-up 2.0.2 && sed -i 's/latest/2.0.2/' "$HOME/.aztec/bin/.aztec-run" && aztec -V
+aztec-up 2.0.3 && sed -i 's/latest/2.0.3/' "$HOME/.aztec/bin/.aztec-run" && aztec -V
 ```
 ### - If you are using CLI: 
 ```
@@ -607,7 +534,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:2.0.2
+    image: aztecprotocol/aztec:2.0.3
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
