@@ -133,13 +133,13 @@ sudo apt-get update
 sudo apt-get install ethereum
 ```
 ```
-wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.15.11-36b2371c.tar.gz
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.16.4-41714b49.tar.gz
 ```
 ```
-tar -xvf geth-linux-amd64-1.15.11-36b2371c.tar.gz
+tar -xvf geth-linux-amd64-1.16.4-41714b49.tar.gz
 ```
 ```
-sudo mv geth-linux-amd64-1.15.11-36b2371c/geth /usr/bin/geth
+sudo mv geth-linux-amd64-1.16.4-41714b49/geth /usr/bin/geth
 ```
 ## 9. Create `geth` Service:
 ```
@@ -565,6 +565,50 @@ docker logs -f aztec
 ```
 ## *Note: If you see this error ``WARN: sequencer Cannot propose block 1 at next L2 slot 385 since the committee does not exist on L1`` Just ignore it, all good. 
 #
+## 17. Update Geth & Prysm version due to Sepolia's Fusaka upgrade (Must Update Before October 14th):
+- Geth:
+```
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.16.4-41714b49.tar.gz
+```
+```
+tar -xvf geth-linux-amd64-1.16.4-41714b49.tar.gz
+```
+```
+sudo mv geth-linux-amd64-1.16.4-41714b49/geth /usr/bin/geth
+```
+```
+sudo systemctl daemon-reload
+sudo systemctl start geth
+sudo systemctl enable geth
+```
+```
+geth --version
+```
+- Prysm:
+```
+sudo -u beacon curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output /home/beacon/bin/prysm.sh
+```
+```
+sudo -u beacon chmod +x /home/beacon/bin/prysm.sh
+```
+```
+cd /home/beacon/bin/
+```
+```
+prysm.sh beacon-chain --version
+```
+```
+sudo systemctl daemon-reload
+sudo systemctl start beacon
+sudo systemctl enable beacon
+```
+- Check if your Geth & Prysm working good:
+```
+sudo systemctl status geth
+```
+```
+sudo systemctl status beacon
+```
 ## If You Want Stop & Remove:
 ```
 systemctl stop geth.service
