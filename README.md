@@ -595,7 +595,7 @@ sudo -u beacon chmod +x /home/beacon/bin/prysm.sh
 cd /home/beacon/bin/
 ```
 ```
-prysm.sh beacon-chain --version
+./prysm.sh beacon-chain --version
 ```
 ```
 sudo nano /etc/systemd/system/beacon.service
