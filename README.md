@@ -598,6 +598,37 @@ cd /home/beacon/bin/
 prysm.sh beacon-chain --version
 ```
 ```
+sudo nano /etc/systemd/system/beacon.service
+```
+```
+[Unit]
+
+Description=Prysm Beacon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+User=beacon
+ExecStart=/home/beacon/bin/prysm.sh beacon-chain \
+  --sepolia \
+  --http-modules=beacon,config,node,validator \
+  --rpc-host=0.0.0.0 --rpc-port=4000 \
+  --grpc-gateway-host=0.0.0.0 --grpc-gateway-port=3500 \
+  --datadir /home/beacon/beacon \
+  --execution-endpoint=http://127.0.0.1:8551 \
+  --jwt-secret=/var/lib/secrets/jwt.hex \
+  --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io/ \
+  --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io/ \
+  --subscribe-all-data-subnets \
+  --accept-terms-of-use
+
+[Install]
+WantedBy=multi-user.target
+```
+```
 sudo systemctl daemon-reload
 sudo systemctl start beacon
 sudo systemctl enable beacon
