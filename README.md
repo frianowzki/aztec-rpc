@@ -655,7 +655,20 @@ nano docker-compose.yml
       - 8880:8880
 ```
 # <img width="363" height="133" alt="image" src="https://github.com/user-attachments/assets/1afb9c4d-7166-42a3-b2d1-529ac65abdc7" />
-- Save and restart the node
+- Add this to any of these lines:
+```
+      GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS: ${GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS}
+```
+<img width="915" height="257" alt="image" src="https://github.com/user-attachments/assets/d266228a-2ab6-454f-832c-3a3dafc56bf3" />
+
+```
+nano .env
+```
+- Add this to the new line:
+```
+GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS=0x9d8869d17af6b899aff1d93f23f863ff41ddc4fa
+```
+- Restart the node:
 ```
 docker-compose down -v && docker-compose up -d && cd
 ```
