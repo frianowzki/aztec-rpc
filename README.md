@@ -675,9 +675,7 @@ curl -X POST http://localhost:8880 \
 ```
 - Change the ``localhost`` with your VPS IP since we don't use host mode.
 ![photo_2025-10-14_00-11-26](https://github.com/user-attachments/assets/fa7de7c9-fe13-443c-abd8-fbc5ba24e47a)
-- To verify that it done, run this
-
-*change the ``localhost`` with your VPS IP:
+- To verify that it done, run this:
 ```
 curl -X POST http://localhost:8880 \
   -H 'Content-Type: application/json' \
@@ -687,6 +685,7 @@ curl -X POST http://localhost:8880 \
     "id":1
   }'
 ```
+*change the ``localhost`` with your VPS IP
 #
 ## If You Want Stop & Remove:
 ```
