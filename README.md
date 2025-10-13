@@ -675,7 +675,18 @@ curl -X POST http://localhost:8880 \
 ```
 - Change the ``localhost`` with your VPS IP since we don't use host mode.
 ![photo_2025-10-14_00-11-26](https://github.com/user-attachments/assets/fa7de7c9-fe13-443c-abd8-fbc5ba24e47a)
+- To verify that it done, run this
 
+*change the ``localhost`` with your VPS IP:
+```
+curl -X POST http://localhost:8880 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "jsonrpc":"2.0",
+    "method":"nodeAdmin_getConfig",
+    "id":1
+  }'
+```
 #
 ## If You Want Stop & Remove:
 ```
