@@ -640,6 +640,43 @@ sudo systemctl status geth
 ```
 sudo systemctl status beacon
 ```
+## 18. Add New Governance Proposal:
+```
+sudo ufw allow 8880
+```
+```
+cd .aztec/testnet
+```
+```
+nano docker-compose.yml
+```
+- Add this on port part:
+```
+      - 8880:8880
+```
+# <img width="363" height="133" alt="image" src="https://github.com/user-attachments/assets/1afb9c4d-7166-42a3-b2d1-529ac65abdc7" />
+- Save and restart the node
+```
+docker-compose down -v && docker-compose up -d && cd
+```
+```
+cd .aztec
+```
+- Now add the new Governance Proposal
+```
+curl -X POST http://localhost:8880 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "jsonrpc":"2.0",
+    "method":"nodeAdmin_setConfig",
+    "params":[{"governanceProposerPayload":"0x9D8869D17Af6B899AFf1d93F23f863FF41ddc4fa"}],
+    "id":1
+  }'
+```
+- Change the ``localhost`` with your VPS IP since we don't use host mode.
+![photo_2025-10-14_00-11-26](https://github.com/user-attachments/assets/fa7de7c9-fe13-443c-abd8-fbc5ba24e47a)
+
+#
 ## If You Want Stop & Remove:
 ```
 systemctl stop geth.service
