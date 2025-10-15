@@ -577,7 +577,7 @@ tar -xvf geth-linux-amd64-1.16.4-41714b49.tar.gz
 sudo mv geth-linux-amd64-1.16.4-41714b49/geth /usr/bin/geth
 ```
 ```
-sudo styemctl stop geth
+sudo systemctl stop geth
 sudo systemctl daemon-reload
 sudo systemctl start geth
 sudo systemctl enable geth
