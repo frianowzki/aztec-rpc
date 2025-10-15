@@ -646,6 +646,18 @@ sudo systemctl status beacon
 ```
 sudo ufw allow 8880
 ```
+- For CLI users:
+```
+aztec start --node --archiver --sequencer \
+  --network testnet \
+  --l1-rpc-urls RPC_URL  \
+  --l1-consensus-host-urls BEACON_URL \
+  --sequencer.validatorPrivateKeys 0xPK1,0xPK2,etc \
+  --sequencer.publisherPrivateKey 0xYourPrivateKey \
+  --sequencer.coinbase 0xYourAddress \
+  --sequencer.governanceProposerPayload 0x9D8869D17Af6B899AFf1d93F23f863FF41ddc4fa \
+  --p2p.p2pIp Your_IP
+```
 ```
 cd .aztec/testnet
 ```
