@@ -690,7 +690,7 @@ docker-compose down -v && docker-compose up -d && cd
 ```
 cd .aztec
 ```
-- Now add the new Governance Proposal
+- Now add the new Governance Proposal (for both CLI & Docker-Compose users):
 ```
 curl -X POST http://localhost:8880 \
   -H 'Content-Type: application/json' \
