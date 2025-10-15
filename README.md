@@ -658,6 +658,7 @@ aztec start --node --archiver --sequencer \
   --sequencer.governanceProposerPayload 0x9D8869D17Af6B899AFf1d93F23f863FF41ddc4fa \
   --p2p.p2pIp Your_IP
 ```
+- For Docker Compose users:
 ```
 cd .aztec/testnet
 ```
