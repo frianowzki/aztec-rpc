@@ -184,6 +184,10 @@ sudo systemctl enable geth
 ```
 sudo systemctl status geth
 ```
+## - Check 'geth' Version:
+```
+geth --version
+```
 ## - Check `geth` Logs:
 ```
 sudo journalctl -fu geth
