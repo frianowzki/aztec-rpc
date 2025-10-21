@@ -142,6 +142,9 @@ tar -xvf geth-linux-amd64-1.16.5-737ffd1b.tar.gz
 ```
 sudo mv geth-linux-amd64-1.16.5-737ffd1b/geth /usr/bin/geth
 ```
+```
+rm -rf geth-linux-amd64-1.16.5-737ffd1b geth-linux-amd64-1.16.5-737ffd1b.tar.gz
+```
 ## 9. Create `geth` Service:
 ```
 sudo nano /etc/systemd/system/geth.service
