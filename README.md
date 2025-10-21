@@ -45,7 +45,7 @@ aztec-up 2.0.3
 docker ps -a
 ```
 ```
-docker stop [aztec-container-id] && docker rm [aztec-container-id]
+docker stop aztec && docker rm aztec
 ```
 ```
 rm -rf /tmp/aztec-world-state-*
