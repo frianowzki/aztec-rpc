@@ -35,7 +35,7 @@ echo 'export PATH=$PATH:/root/.aztec/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 ```
-aztec-up alpha-testnet
+aztec-up 2.0.3
 ```
 #
 ## 2. Update Sequencer:
@@ -133,13 +133,13 @@ sudo apt-get update
 sudo apt-get install ethereum
 ```
 ```
-wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.16.4-41714b49.tar.gz
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.16.5-737ffd1b.tar.gz
 ```
 ```
-tar -xvf geth-linux-amd64-1.16.4-41714b49.tar.gz
+tar -xvf geth-linux-amd64-1.16.5-737ffd1b.tar.gz
 ```
 ```
-sudo mv geth-linux-amd64-1.16.4-41714b49/geth /usr/bin/geth
+sudo mv geth-linux-amd64-1.16.5-737ffd1b/geth /usr/bin/geth
 ```
 ## 9. Create `geth` Service:
 ```
@@ -191,8 +191,18 @@ sudo journalctl -fu geth
 ## 10. Create `beacon` Directory & Configure `prysm`:
 ```
 sudo -u beacon mkdir /home/beacon/bin
+```
+```
 sudo -u beacon curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output /home/beacon/bin/prysm.sh
+```
+```
 sudo -u beacon chmod +x /home/beacon/bin/prysm.sh
+```
+```
+cd /home/beacon/bin/
+```
+```
+./prysm.sh beacon-chain --version
 ```
 ## - Create `beacon` Service:
 ```
@@ -220,6 +230,7 @@ ExecStart=/home/beacon/bin/prysm.sh beacon-chain \
   --jwt-secret=/var/lib/secrets/jwt.hex \
   --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io/ \
   --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io/ \
+  --subscribe-all-data-subnets \
   --accept-terms-of-use
 
 [Install]
@@ -568,13 +579,13 @@ docker logs -f aztec
 ## 17. Update Geth & Prysm version due to Sepolia's Fusaka upgrade (Must Update Before October 14th):
 - Geth:
 ```
-wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.16.4-41714b49.tar.gz
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.16.5-737ffd1b.tar.gz
 ```
 ```
-tar -xvf geth-linux-amd64-1.16.4-41714b49.tar.gz
+tar -xvf geth-linux-amd64-1.16.5-737ffd1b.tar.gz
 ```
 ```
-sudo mv geth-linux-amd64-1.16.4-41714b49/geth /usr/bin/geth
+sudo mv geth-linux-amd64-1.16.5-737ffd1b/geth /usr/bin/geth
 ```
 ```
 sudo systemctl stop geth
