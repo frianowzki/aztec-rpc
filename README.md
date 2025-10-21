@@ -90,6 +90,7 @@ sudo ufw allow 12000/udp
 sudo ufw allow 13000/tcp
 sudo ufw allow 22/tcp
 sudo ufw allow 443/tcp
+sudo ufw allow 8880
 sudo ufw enable
 ```
 ```
