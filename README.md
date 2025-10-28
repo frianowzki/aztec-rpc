@@ -517,7 +517,7 @@ mkdir -p $HOME/.aztec/testnet
 cd .aztec/testnet
 ```
 ```
-aztec-up 2.0.3 && sed -i 's/latest/2.0.3/' "$HOME/.aztec/bin/.aztec-run" && aztec -V
+aztec-up 2.0.4 && sed -i 's/latest/2.0.4/' "$HOME/.aztec/bin/.aztec-run" && aztec -V
 ```
 ### - If you are using CLI: 
 ```
@@ -528,6 +528,7 @@ aztec start --node --archiver --sequencer \
   --sequencer.validatorPrivateKeys 0xPK1,0xPK2,etc \
   --sequencer.publisherPrivateKey 0xYourPrivateKey \
   --sequencer.coinbase 0xYourAddress \
+  --sequencer.governanceProposerPayload 0xDCd9DdeAbEF70108cE02576df1eB333c4244C666 \
   --p2p.p2pIp Your_IP
 ```
 #
@@ -545,6 +546,7 @@ VALIDATOR_PRIVATE_KEYS=0xPK1,0xPK2,etc
 PUBLISHER_PRIVATE_KEY=0xYourPrivateKey
 COINBASE=0xYourAddress
 P2P_IP=Your_IP
+GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS=0xDCd9DdeAbEF70108cE02576df1eB333c4244C666
 ```
 ### Ctrl + X + Y > Enter
 ```
@@ -554,13 +556,14 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:2.0.3
+    image: aztecprotocol/aztec:2.0.4
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
       L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
       DATA_DIRECTORY: /data
       VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+      GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS: ${GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS}
       SEQ_PUBLISHER_PRIVATE_KEY: ${PUBLISHER_PRIVATE_KEY}
       COINBASE: ${COINBASE}
       P2P_IP: ${P2P_IP}
@@ -674,7 +677,7 @@ aztec start --node --archiver --sequencer \
   --sequencer.validatorPrivateKeys 0xPK1,0xPK2,etc \
   --sequencer.publisherPrivateKey 0xYourPrivateKey \
   --sequencer.coinbase 0xYourAddress \
-  --sequencer.governanceProposerPayload 0x9D8869D17Af6B899AFf1d93F23f863FF41ddc4fa \
+  --sequencer.governanceProposerPayload 0xDCd9DdeAbEF70108cE02576df1eB333c4244C666 \
   --p2p.p2pIp Your_IP
 ```
 - For Docker Compose users:
@@ -700,7 +703,7 @@ nano .env
 ```
 - Add this to the new line:
 ```
-GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS=0x9d8869d17af6b899aff1d93f23f863ff41ddc4fa
+GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS=0xDCd9DdeAbEF70108cE02576df1eB333c4244C666
 ```
 - Restart the node:
 ```
@@ -716,7 +719,7 @@ curl -X POST http://localhost:8880 \
   -d '{
     "jsonrpc":"2.0",
     "method":"nodeAdmin_setConfig",
-    "params":[{"governanceProposerPayload":"0x9D8869D17Af6B899AFf1d93F23f863FF41ddc4fa"}],
+    "params":[{"governanceProposerPayload":"0xDCd9DdeAbEF70108cE02576df1eB333c4244C666"}],
     "id":1
   }'
 ```
