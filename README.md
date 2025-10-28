@@ -664,7 +664,13 @@ sudo systemctl status geth
 ```
 sudo systemctl status beacon
 ```
-## 18. Add New Governance Proposal:
+## 18. Add New Governance Proposal & Update to ``2.0.4``:
+```
+cd .aztec/testnet
+```
+```
+aztec-up 2.0.4 && sed -i 's/latest/2.0.4/' "$HOME/.aztec/bin/.aztec-run" && aztec -V
+```
 ```
 sudo ufw allow 8880
 ```
@@ -698,6 +704,33 @@ nano docker-compose.yml
 ```
 <img width="915" height="257" alt="image" src="https://github.com/user-attachments/assets/d266228a-2ab6-454f-832c-3a3dafc56bf3" />
 
+- So it will look like this:
+```
+services:
+  aztec-node:
+    container_name: aztec
+    image: aztecprotocol/aztec:2.0.4
+    restart: unless-stopped
+    environment:
+      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
+      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
+      DATA_DIRECTORY: /data
+      VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+      GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS: ${GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS}
+      SEQ_PUBLISHER_PRIVATE_KEY: ${PUBLISHER_PRIVATE_KEY}
+      COINBASE: ${COINBASE}
+      P2P_IP: ${P2P_IP}
+      LOG_LEVEL: info
+    entrypoint: >
+      sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start --network testnet --node --archiver --sequencer'
+    ports:
+      - 40400:40400/tcp
+      - 40400:40400/udp
+      - 8081:8081
+    volumes:
+      - /root/.aztec/testnet/data/:/data
+```
+- Now edit the .env:
 ```
 nano .env
 ```
