@@ -727,6 +727,7 @@ services:
       - 40400:40400/tcp
       - 40400:40400/udp
       - 8081:8081
+      - 8880:8880
     volumes:
       - /root/.aztec/testnet/data/:/data
 ```
