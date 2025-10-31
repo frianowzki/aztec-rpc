@@ -35,7 +35,7 @@ echo 'export PATH=$PATH:/root/.aztec/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 ```
-aztec-up 2.0.3
+aztec-up 2.0.4
 ```
 #
 ## 2. Update Sequencer:
@@ -52,21 +52,21 @@ rm -rf /tmp/aztec-world-state-*
 rm -rf ~/.aztec/alpha-testnet/data
 ```
 ```
-aztec-up 2.0.3
+aztec-up 2.0.4
 ```
 - If You Are Using Docker Compose:
 ```
 cd .aztec/alpha-testnet
 ```
 ```
-aztec-up 2.0.3
+aztec-up 2.0.4
 ```
 ```
 rm -rf /tmp/aztec-world-state-*
 rm -rf ~/.aztec/alpha-testnet/data
 ```
 ```
-sed -i 's|image: aztecprotocol/aztec:.*|image: aztecprotocol/aztec:2.0.3|' docker-compose.yml
+sed -i 's|image: aztecprotocol/aztec:.*|image: aztecprotocol/aztec:2.0.4|' docker-compose.yml
 ```
 ```
 docker-compose down -v && docker-compose up -d 
@@ -337,7 +337,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:2.0.3
+    image: aztecprotocol/aztec:2.0.4
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -380,7 +380,7 @@ docker stop [aztec-container-id] && docker rm [aztec-container-id]
 rm -rf .aztec/alpha-testnet/data
 ```
 ```
-aztec-up 2.0.3
+aztec-up 2.0.4
 ```
 Or if you use Docker Compose you can use this on your .env 
 ```
@@ -404,7 +404,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:2.0.3
+    image: aztecprotocol/aztec:2.0.4
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
@@ -471,7 +471,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec
-    image: aztecprotocol/aztec:2.0.3
+    image: aztecprotocol/aztec:2.0.4
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
